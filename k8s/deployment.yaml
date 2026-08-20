@@ -12,10 +12,10 @@ spec:
     spec:
       containers:
       - name: app
-        image: mahijs/kyndryl_ibm:latest
+        image: nginx
         ports:
         - containerPort: 80
   replicas: 3
   selector:
     matchLabels:
-      app: hcc
+      app: hcl  
