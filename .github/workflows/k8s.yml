@@ -33,7 +33,7 @@ jobs:
 
       - name: Wait for Deployment
         run: |
-          kubectl rollout status deployment/my-app --timeout=120s
+          kubectl rollout status deployment/hcl --timeout=120s
 
       - name: Verify Deployment
         run: |
