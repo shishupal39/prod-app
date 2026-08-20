@@ -1,0 +1,43 @@
+name: Deploy Existing Docker Hub Image to Minikube
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+
+    runs-on:
+      - self-hosted
+      - linux
+      - minikube
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Check Minikube Status
+        run: |
+          minikube status
+          kubectl get nodes
+
+      - name: Show Current Kubernetes Context
+        run: |
+          kubectl config current-context
+
+      - name: Deploy Application
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+
+      - name: Wait for Deployment
+        run: |
+          kubectl rollout status deployment/my-app --timeout=120s
+
+      - name: Verify Deployment
+        run: |
+          kubectl get deployments
+          kubectl get pods
+          kubectl get services
