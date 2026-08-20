@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hcl
+  labels:
+    org: kyndryl
+spec:
+  template:
+    metadata:
+      labels: 
+        app: hcl
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        ports:
+        - containerPort
